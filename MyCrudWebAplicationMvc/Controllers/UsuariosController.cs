@@ -14,13 +14,11 @@ namespace MyCrudWebAplicationMvc.Controllers
             _context = context;
         }
 
-        // GET: Usuarios
         public async Task<IActionResult> Index ( )
         {
             return View ( await _context.Usuarios.ToListAsync ( ) );
         }
 
-        // GET: Usuarios/Details/5
         public async Task<IActionResult> Details ( Guid? id )
         {
             if (id == null)
@@ -39,7 +37,6 @@ namespace MyCrudWebAplicationMvc.Controllers
             return View ( usuario );
         }
 
-        // GET: Usuarios/Create
         public IActionResult Create ( )
         {
             var usuario = new Usuario();
@@ -47,9 +44,6 @@ namespace MyCrudWebAplicationMvc.Controllers
             return View ( usuario );
         }
 
-        // POST: Usuarios/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create ( Usuario usuario, Endereco endereco )
@@ -66,7 +60,6 @@ namespace MyCrudWebAplicationMvc.Controllers
             return View ( usuario );
         }
 
-        // GET: Usuarios/Edit/5
         public async Task<IActionResult> Edit ( Guid id )
         {
             var usuario = await _context.Usuarios.Include(u => u.Endereco).FirstOrDefaultAsync(u => u.Id == id);
@@ -79,9 +72,6 @@ namespace MyCrudWebAplicationMvc.Controllers
             return View ( usuario );
         }
 
-        // POST: Usuarios/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit ( Guid id, Usuario usuario, Endereco endereco )
@@ -98,18 +88,15 @@ namespace MyCrudWebAplicationMvc.Controllers
 
                 try
                 {
-                    // Certifique-se de que o objeto Usuario esteja associado ao contexto do banco de dados
                     _context.Update ( usuario );
 
-                    // Verifique se o Endereco associado ao Usuario está presente e é válido
                     if (usuario.Endereco != null)
                     {
-                        // Se o Endereco tiver um ID, é uma atualização
                         if (usuario.Endereco.Id != Guid.Empty)
                         {
                             _context.Update ( usuario.Endereco );
                         }
-                        else // Se o Endereco não tiver um ID, é uma inserção
+                        else
                         {
                             _context.Add ( usuario.Endereco );
                         }
@@ -133,8 +120,6 @@ namespace MyCrudWebAplicationMvc.Controllers
             return View ( usuario );
         }
 
-
-        // GET: Usuarios/Delete/5
         public async Task<IActionResult> Delete ( Guid? id )
         {
             if (id == null)
@@ -152,7 +137,6 @@ namespace MyCrudWebAplicationMvc.Controllers
             return View ( usuario );
         }
 
-        // POST: Usuarios/Delete/5
         [HttpPost, ActionName ( "Delete" )]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed ( Guid id )

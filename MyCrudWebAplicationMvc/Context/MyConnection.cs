@@ -14,7 +14,6 @@ namespace MyCrudWebAplicationMvc.Context
 
         protected override void OnModelCreating ( ModelBuilder modelBuilder )
         {
-            // Configurar o tipo de dados padrão para strings como varchar
             foreach (var property in modelBuilder.Model.GetEntityTypes ( )
                 .SelectMany ( t => t.GetProperties ( ) )
                 .Where ( p => p.ClrType == typeof ( string ) ))

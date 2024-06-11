@@ -42,7 +42,6 @@
             <h4>Endereço</h4>
             <hr />
 
-            <!-- Renderiza a PartialView de edição do endereço -->
             @if (Model.Endereco != null)
             {
                 await Html.RenderPartialAsync ( "_Endereco", Model.Endereco );
